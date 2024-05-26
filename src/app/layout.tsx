@@ -1,6 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +27,25 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+      <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuLink href="/">Home</NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>About</NavigationMenuTrigger>
+            <NavigationMenuContent className="flex flex-col">
+              <NavigationMenuLink className="hover:bg-yellow-200 px-4" href="/about#products">Products</NavigationMenuLink>
+              <NavigationMenuLink className="hover:bg-yellow-200 px-4" href="/about#services">Services</NavigationMenuLink>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
+        <main>
+          {children}
+        </main>
+      </body>
     </html>
   );
 }
